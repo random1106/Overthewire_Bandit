@@ -44,6 +44,21 @@ Password: MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
 
 ## Level 3 ->  Level 4
 
+1. Use `ssh` to login with the password of the previous step.
+
+2. Use `ls -la` to check all the files or folders in the current directory.
+
+![image](https://github.com/user-attachments/assets/affc88fe-23cc-4941-841f-4b5bbc779c3d)
+
+3. Enter the `inhere` folder, use `ls -la` again, we find the file `...Hiding-From-You`.
+
+4. Use `cat ...Hiding-From-You`, and you will find the password.
+
+Password: 2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+
+## Level 4 -> Level 5
+
+
 
 
 
