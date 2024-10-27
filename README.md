@@ -46,9 +46,7 @@ Password: MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
 
 1. Use `ssh` to login with the password of the previous step.
 
-2. Use `ls -la` to check all the files or folders in the current directory.
-
-![image](https://github.com/user-attachments/assets/affc88fe-23cc-4941-841f-4b5bbc779c3d)
+2. Use `ls`, then use `cd inhere` to enter the directory.
 
 3. Enter the `inhere` folder, use `ls -la` again, we find the file `...Hiding-From-You`.
 
@@ -57,6 +55,83 @@ Password: MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
 Password: 2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
 
 ## Level 4 -> Level 5
+
+1. Use `ssh` to login with the password of the previous step.
+
+2. Use `ls`, then use `cd inhere` to enter the directory. We find `-file00` ... `-file09`.
+
+3. Use `file ./*` (the ./ is used for escaping `-` in the filenames),
+
+![image](https://github.com/user-attachments/assets/91c4a6f1-1aa4-4c68-b577-7e367b7934b3)
+
+4. Use `cat ./file07` open the ASCII text file and obtain the password.
+
+Password: 4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+
+## Level 5 -> Level 6
+
+1. Use `ssh` to login with the password of the previous step.
+
+2. `cd inhere`
+
+3. We want to find the files that is human-readable, size 1033 bytes and non-executable.
+
+`find -type f -size 1033c | file -f- | grep -i 'text'`
+
+Here `-type f` seraches for the file instead of directory, `-size 1033c` specifies the size of the file, the `-f-` flag specifies the input is a list of files, `grep -i 'text'` filters the human-readable file.
+
+![image](https://github.com/user-attachments/assets/a1bc4d4b-f253-493e-9a43-f3dcb418c942)
+
+4. Open the file and find the password.
+
+Password: HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
+
+## Level 6 -> Level 7
+
+1. Use `ssh` to login with the password of the previous step.
+
+2 `find / -user bandit7 -group bandit6 -size 33c 2>/dev/null`
+
+Here `-user` and `-group` specify the user and group name. `2>/dev/null` discards the error message.
+
+![image](https://github.com/user-attachments/assets/1ed9f02c-5e6c-47e6-a4e2-b530f6e2badb)
+
+3. Use `cat /var/lib/dpkg/info/bandit7.password` and find the password.
+
+Password: morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
+
+## Level 7 -> Level 8
+
+1. Use `ssh` to login with the password of the previous step.
+
+2. `cat data.txt | grep -i "millionth"
+
+![image](https://github.com/user-attachments/assets/5cf2a52a-0641-455f-b320-be8baeba49cb)
+
+Password: dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
+
+## Level 8 -> Level 9
+
+1. Use `ssh` to login with the password of the previous step.
+
+2. Use `ls`, we find `data.txt`. Use `sort data.txt | uniq -u`
+
+Here `sort` sorts the txt file according to rows, `uniq -u` only prints unique lines.
+
+![image](https://github.com/user-attachments/assets/5e0d8e9d-d4e3-44f7-9d71-df74c5a0cd90)
+
+Password: 4CKMh1JI91bUIZZPXDqGanal4xvAg0JM
+
+## Level 9 -> Level 10
+
+
+
+
+
+
+
+
+
 
 
 
