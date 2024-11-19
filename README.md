@@ -306,3 +306,93 @@ After connecting, submit the password of level 14, we retrieve the password for 
 
 The password to next level is 
 8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
+
+## Level 15 -> Level 16
+
+`openssl s_client -connect 127.0.0.1`
+
+Enter the password of the current level after the 'Read R BLOCK', we get 
+
+![alt text](./images/image-22.png)
+
+The password to next level is kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
+
+## Level 16 -> Level 17
+
+`nmap 127.0.0.1 -p 31000-32000 -sV`
+
+![alt text](./images/image-24.png)
+
+`openssl s_client 127.0.0.1 31518`
+
+![alt text](./images/image-25.png)
+
+Something seems wrong ... Let us try the other port with ssl service
+
+`openssl s_client 127.0.0.1 31790`
+
+We Enter the password and retrieve the ssh private key
+
+![alt text](./images/image-26.png)
+
+Store it in a local file `sshkey.private` 
+
+make it not accessible by others.
+
+`chmod 400 sshkey.private`
+
+Then we use 
+
+`ssh -i sshkey.private bandit17@bandit.labs.overthewire.org -p 2220`
+
+to log into the next level. 
+
+We can retrieve the password in `/etc/bandit_pass` once we logged in.
+
+The passowrd is EReVavePLFHtFlFsjn3hyzMlvSuSAcRD
+
+## Level 17 -> Level 18
+
+`diff passwords.new passwords.old`
+
+< indicates the difference in the first file, while > indicates the difference in the second file.
+
+![alt text](./images/image-27.png)
+
+The password to the next level is x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO
+
+## Level 18 -> Level 19
+
+When using ssh to log in, the session immediately finishes. 
+
+So we attach the command `cat readme` right after the ssh
+
+`ssh bandit18@bandit.labs.overthewire.org -p 2220 cat readme`
+
+This retrieves the password.
+
+![alt text](./images/image-28.png)
+
+The password to the next level is cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8
+
+## Level 19 -> Level 20
+
+We try to run command via `bandit20-do` 
+
+`./bandit20-do id`
+
+![alt text](./images/image-29.png)
+
+This tells us when running command using `./bandit20-do`, the effective user is `bandit20`. Therefore, we can extract the password via 
+
+`./bandit20-do cat /etc/bandit_pass/bandit20`
+
+![alt text](./images/image-31.png)
+
+The password to the next level is 0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO
+
+
+
+
+
+
