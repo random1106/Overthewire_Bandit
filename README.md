@@ -151,7 +151,7 @@ FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
 
 Here the option `-d` is used to decode the base64 encoding.
 
-![alt text](./images/image-1.png)
+![alt text](images/image-1.png)
 
 The password to next level is 
 dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr
@@ -165,7 +165,7 @@ we need to rotate a → n, b → o, ..., n → a, o → b and similarly
 for the capitalized letter. By using `tr`, we complete 
 this rotation.
 
-![alt text](./images/image-2.png)
+![alt text](images/image-2.png)
 
 The password to next level is 
 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
@@ -179,13 +179,13 @@ make a folder inside.
 
 The temp directory is /tmp/tmp.Sqb3z4WIof
 
-![alt text](./images/image-3.png)
+![alt text](images/image-3.png)
 
 `cp /home/bandit12/data.txt /tmp/tmp.Sqb3z4WIof`
 
 Enter the temp folder, inspect the file, it is a hex dump.
 
-![alt text](./images/image-4.png)
+![alt text](images/image-4.png)
 
 We can use `xxd -r` to decode the hexdump. 
 
@@ -195,7 +195,7 @@ We check the file type using
 
 `file decode.txt`
 
-![alt text](./images/image-5.png)
+![alt text](images/image-5.png)
 
 Let us uncompress the file using gunzip, before that, we need 
 to modify the extension to `.gz`
@@ -204,15 +204,15 @@ to modify the extension to `.gz`
 
 We get a new file `data2.bin`. 
 
-![alt text](./images/image-6.png)
+![alt text](images/image-6.png)
 
 `mv data2.bin data2.bin.bz2 && bzip2 -d data2.bin.bz2`
 
-![alt text](./images/image-7.png)
+![alt text](images/image-7.png)
 
 Check the file type, and repeat the previous steps. 
 
-![alt text](./images/image-8.png)
+![alt text](images/image-8.png)
 
 This time we get a tar archive.
 
@@ -221,27 +221,27 @@ This time we get a tar archive.
 `-v` means verbose. `-x` is for extraction. 
 `-f` uses archive file or device ARCHIVE.
 
-![alt text](./images/image-9.png)
+![alt text](images/image-9.png)
 
 We get `data5.bin`
 
-![alt text](./images/image-10.png)
+![alt text](images/image-10.png)
 
 Repeat the previous step
 
 `mv data5.bin data5.bin.tar && tar -xvf data5.bin.tar`
 
-![alt text](./images/image-11.png)
+![alt text](images/image-11.png)
 
 We get `data6.bin`
 
-![alt text](./images/image-12.png)
+![alt text](images/image-12.png)
 
 Repeat the previous step
 
 `mv data6.bin data6.bin.bz2 && bzip2 -d data6.bin.bz2`
 
-![alt text](./images/image-14.png)
+![alt text](images/image-14.png)
 
 Repeat the previous step
 
@@ -249,7 +249,7 @@ Repeat the previous step
 
 We get `data8.bin`
 
-![alt text](./images/image-15.png)
+![alt text](images/image-15.png)
 
 Repeat
 
@@ -257,7 +257,7 @@ Repeat
 
 We get the password
 
-![alt text](./images/image-16.png)
+![alt text](images/image-16.png)
 
 The password to next level is 
 FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn
@@ -266,7 +266,7 @@ FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn
 
 There is a ssh private key in the level 13
 
-![alt text](./images/image-17.png)
+![alt text](images/image-17.png)
 
 We copy the ssh private key to our local machine as `sshkey.private`
 
@@ -274,19 +274,19 @@ We need to set the key to be only readable to the owner
 
 `chmod 400`
 
-![alt text](./images/image-18.png)
+![alt text](images/image-18.png)
 
 We use the private key to log in to level 14
 
 `ssh -i sshkey.private bandit14@bandit.labs.overthewire.org -p 2220`
 
-![alt text](./images/image-19.png)
+![alt text](images/image-19.png)
 
 Success. We can retrieve the password for level 14 by 
 
 `cat /etc/bandit_pass/bandit14`
 
-![alt text](./images/image-20.png)
+![alt text](images/image-20.png)
 
 The password to next level is 
 MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS
@@ -302,7 +302,7 @@ DNS resolution, `-v` is the verbose mode.
 
 After connecting, submit the password of level 14, we retrieve the password for Level 15.
 
-![alt text](./images/image-21.png)
+![alt text](images/image-21.png)
 
 The password to next level is 
 8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
@@ -313,7 +313,7 @@ The password to next level is
 
 Enter the password of the current level after the 'Read R BLOCK', we get 
 
-![alt text](./images/image-22.png)
+![alt text](images/image-22.png)
 
 The password to next level is kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
 
@@ -321,11 +321,11 @@ The password to next level is kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
 
 `nmap 127.0.0.1 -p 31000-32000 -sV`
 
-![alt text](./images/image-24.png)
+![alt text](images/image-24.png)
 
 `openssl s_client 127.0.0.1 31518`
 
-![alt text](./images/image-25.png)
+![alt text](images/image-25.png)
 
 Something seems wrong ... Let us try the other port with ssl service
 
@@ -333,7 +333,7 @@ Something seems wrong ... Let us try the other port with ssl service
 
 We Enter the password and retrieve the ssh private key
 
-![alt text](./images/image-26.png)
+![alt text](images/image-26.png)
 
 Store it in a local file `sshkey.private` 
 
@@ -357,7 +357,7 @@ The passowrd is EReVavePLFHtFlFsjn3hyzMlvSuSAcRD
 
 < indicates the difference in the first file, while > indicates the difference in the second file.
 
-![alt text](./images/image-27.png)
+![alt text](images/image-27.png)
 
 The password to the next level is x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO
 
@@ -371,7 +371,7 @@ So we attach the command `cat readme` right after the ssh
 
 This retrieves the password.
 
-![alt text](./images/image-28.png)
+![alt text](images/image-28.png)
 
 The password to the next level is cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8
 
@@ -381,18 +381,119 @@ We try to run command via `bandit20-do`
 
 `./bandit20-do id`
 
-![alt text](./images/image-29.png)
+![alt text](images/image-29.png)
 
 This tells us when running command using `./bandit20-do`, the effective user is `bandit20`. Therefore, we can extract the password via 
 
 `./bandit20-do cat /etc/bandit_pass/bandit20`
 
-![alt text](./images/image-31.png)
+![alt text](images/image-31.png)
 
 The password to the next level is 0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO
 
+## Level 20 -> Level 21
+
+On level 20, we find an executable file named suconnect with SUID. This means that if we can execute it, we can run it as the root user.
+
+![alt text](images/image-32.png)
+
+According to the problem, this file makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).
+
+So we use `nc -nlvp 4444` to set up a listener. 
+
+Then log in through another terminal, do `.\suconnect 4444`
+
+![alt text](images/image-34.png)
+
+As expected, we see a connection on the listener.
+
+![alt text](images/image-33.png)
+
+We input the password of level 20 and retrieve the password of level 21. 
+
+![alt text](images/image-35.png)
+
+The password to the next level is EeoULMCra2q0dSkYj561DX7s1CpBuOBt
+
+## Level 21 -> Level 22
+
+According to the instruction, we look at /etc/cron.d folder. We have read permission to `cronjob_bandit22`, open it.
+
+![alt text](images/image-36.png)
 
 
+The cron file runs `usr/bin/cronjob_bandit22.sh`, for which we have read permission.
 
+![alt text](images/image-39.png)
+
+Read the file. 
+
+![alt text](images/image-37.png)
+
+It seems the file will read the password of level 22 and write it to a file in `/tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv`. We read this file and find the password.
+
+![alt text](images/image-38.png)
+
+The password to the next level is tRae0UfB9v0UzbCdn9cY0gQnds9GF58Q
+
+## Level 22 -> Level 23
+
+Go to `/etc/cron.d` and open `cronjob_bandit23`
+
+![alt text](image-41.png)
+
+base on the output, we know this file will be executed by user `bandit23` every minute. Let us browse the content. 
+
+![alt text](image-42.png)
+
+So the user `bandit23` run the file and write the password of level 23 to a file whose name is encrypted in the `tmp` folder.
+
+We can find the name by running the command with `$myname = bandit23`
+
+![alt text](images/image-40.png)
+
+Open the file `/tmp/8ca319486bfbbc3663ea0fbe81326349`, we find the password. 
+
+![alt text](image-44.png)
+
+The password to the next level is 0Zf11ioIjMVN551jX3CmStKLYqjk54Ga
+
+## Level 23 -> Level 24
+
+Open the file `cronjob_bandit24` in the directory `/etc/cron.d`. This file will be run by user `bandit24` every minute. 
+
+![alt text](images/image-45.png)
+
+In particular, it will delete every file in `/var/spool/bandit24/foo`. And if the owner of the file is `bandit23`, if will run it, then delete.
+
+![alt text](images/image-46.png)
+
+We write a `script.sh` the in tmp folder `/tmp/tmp.cYY5SQP0B0`
+
+```
+#!/bin/bash
+
+cat /etc/bandit_pass/bandit24
+```
+
+`chmod a+x`
+
+We copy it to `/var/spool/bandit24/foo` and hope this to be executed. However, we receive no response from our screen. This is because the `cronjob_bandit24.sh` will redirect the output to `/dev/null`
+
+![alt text](images/image-47.png)
+
+So we change our script. We open a netcat listener on port 4444, and paste the `script.sh` to `/var/spool/bandit24/foo` with the following content
+
+```
+#!/bin/bash
+
+cat /etc/bandit_pass/bandit24 | nc 127.0.0.1 4444
+```
+
+![alt text](images/image-48.png)
+
+The password to the next level is gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8
+
+## Level 24 -> Level 25
 
 
