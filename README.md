@@ -140,7 +140,7 @@ The password to next level is
 Here data.txt is a binary file, we need to add `-a` option so 
 that `grep` can process as if it were text
 
-![alt text](image.png)
+![alt text](images/image.png)
 
 The password to next level is 
 FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
@@ -440,11 +440,11 @@ The password to the next level is tRae0UfB9v0UzbCdn9cY0gQnds9GF58Q
 
 Go to `/etc/cron.d` and open `cronjob_bandit23`
 
-![alt text](image-41.png)
+![alt text](images/image-41.png)
 
 base on the output, we know this file will be executed by user `bandit23` every minute. Let us browse the content. 
 
-![alt text](image-42.png)
+![alt text](images/image-42.png)
 
 So the user `bandit23` run the file and write the password of level 23 to a file whose name is encrypted in the `tmp` folder.
 
@@ -454,7 +454,7 @@ We can find the name by running the command with `$myname = bandit23`
 
 Open the file `/tmp/8ca319486bfbbc3663ea0fbe81326349`, we find the password. 
 
-![alt text](image-44.png)
+![alt text](images/image-44.png)
 
 The password to the next level is 0Zf11ioIjMVN551jX3CmStKLYqjk54Ga
 
@@ -496,4 +496,211 @@ The password to the next level is gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8
 
 ## Level 24 -> Level 25
 
+Log into the level, as instructed, connect to localhost with port 30002
 
+`nc 127.0.0.1 30002`
+
+A banner popped up asking for a current level password + pincode, pincode is with range 0000-9999
+
+We just try something wrong to see what the response is.
+
+![alt text](images/image-51.png)
+
+We then use the following script to loop through all possible password. This generates a huge output. We only select the output line without "Wrong!" and find the password. 
+
+```
+#!/bin/bash
+
+pass="gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8"
+for i in $(seq -w 0 9999); 
+do    
+    echo "$pass $i" >> passcode.txt
+done
+
+cat passcode.txt | nc 127.0.0.1 30002 | grep -v "Wrong!"
+
+```
+
+![alt text](images/image-49.png)
+
+The password to the next level is iCi86ttT4KSNe1armKiwbQNmB3YJP3q4
+
+## Level 25 -> Level 26
+
+Log into level 25, we find a sshkey.
+
+![alt text](images/image-50.png)
+
+copy it to a local file `bandit26.sshkey`, change permission `chmod 400 bandit26.sshkey` use it to log into level 26. 
+
+When we connect to level 26, the connection is successful but also closed immediately. We also find an extra at the end of the banner. 
+
+![alt text](images/image-52.png)
+
+We suspect that this is window issue so we shrink the window and retry. 
+
+![alt text](images/image-54.png)
+
+Interesting, this time, we are viewing a file with more. 
+
+![alt text](images/image-53.png)
+
+press v to enter `vim` and put `:set shell=/bin/bash` to specify the bash shell. Finally, enter `:shell`, we get the shell.
+
+![alt text](images/image-55.png)
+
+![alt text](images/image-56.png)
+
+Open `/etc/bandit_pass/bandit26`, we get the password to the next level:
+
+s0773xxkk0MXfdqOfPRVr9L3jJBUOgCZ
+
+## Level 26 -> Level 27
+
+![alt text](images/image-58.png)
+
+We see there is a bandit27-do file which has a SUID. This means that if we can execute the file, we will execute it as the owner. 
+
+![alt text](images/image-57.png)
+
+Indeed `./bandit27-do whoami` returns bandit27 instead of bandit26. 
+
+We can read the password file of bandit27 via
+
+`./bandit27-do cat /etc/bandit_pass/bandit27`
+
+![alt text](images/image-59.png)
+
+The password to the next level is upsNCc7vzaRDx6oZC6GiR6ERwe1MowGB
+
+## Level 27 -> Level 28
+
+Log into level 27. We use `mktemp -d` to create a temporary directory. 
+
+![alt text](images/image-61.png)
+
+We use 
+
+`git clone ssh://bandit27-git@localhost:2220/home/bandit27-git/repo` to clone the file to the tmp directory
+
+![alt text](images/image-62.png)
+
+We open the `README` and get the password. 
+
+![alt text](images/image-60.png)
+
+The passowrd to the next level is Yz9IpL0sBcCeuG7m9uQFt8ZNpS4HZRcN
+
+## Level 28 -> Level 29
+
+Clone the repo as the previous level.
+
+`git clone ssh://bandit28-git@localhost:2220/home/bandit28-git/repo`
+
+Open `README.md`, the password is not shown.
+
+![alt text](images/image-64.png)
+
+We find there is `.git` file in the same directory. 
+
+![alt text](images/image-65.png)
+
+Use `git log` to chekc the history of the repo.
+
+![alt text](images/image-63.png)
+
+Using `git show` Check the commit with description `add missing data`
+
+![alt text](images/image-66.png)
+
+We get the password
+
+4pT1t5DENaYuqnqvadYs1oE4QLCdjmJ7
+
+## Level 29 -> Level 30
+
+`git clone ssh://bandit29-git@localhost:2220/home/bandit29-git/repo`
+
+Open `README.md` in the repo, we find the username `bandit30` but with no password.
+
+![alt text](images/image-70.png)
+
+Check the log, there is an early version.
+
+![alt text](images/image-68.png)
+
+Check the early version, as described in the log, the username is changed, but still no password. 
+
+![alt text](images/image-69.png)
+
+Use `git branch -a` to see if there is another branch. 
+
+![alt text](images/image-71.png)
+
+We indeed have other branch. Use `git checkout remotes/origin/dev` to switch to another branch. Check the `README.md` again, we get the password.
+
+![alt text](images/image-67.png)
+
+The password to the next level is qp30ex3VLz5MDG1n91YowTv4Q8l7CDZL
+
+## Level 30 -> Level 31
+
+clone the repo, the `README.md` does not provide much information.
+
+![alt text](images/image-72.png)
+
+We use `git tag` to list all tags.
+
+![alt text](images/image-73.png)
+
+There is a tag called secret. We show the tag via `git show seret`
+
+![alt text](images/image-74.png)
+
+The password to the next level is fb5S2xb7bRyFmAvQYQGEqsbhVyJqhnDy
+
+## Level 31 -> Level 32
+
+Check the `README.md`
+
+![alt text](images/image-77.png)
+
+Create a `key.txt` with the required content. We want to push it to the remote repository. 
+
+The first step is `git add key.txt`. However, We receive the following message.
+
+![alt text](images/image-78.png)
+
+The reason is that `.txt` is ignored in `.gitignore`
+
+![alt text](images/image-76.png)
+
+We do `git add -f key.txt` to ignore the `.gitignore` file. Then we continue to push the file. 
+
+`git commit -m "add key.txt"`
+
+`git push -u origin master`
+
+![alt text](images/image-75.png)
+
+The password to the next level is 3O9RfhqyAlVBEZpVb6LYStshZoqoSx5K
+
+## Level 32 -> Level 33
+
+Use ssh to log into the shell
+
+![alt text](images/image-80.png)
+
+This is a `sh` shell, but it is weird, since everything we input will be turned into uppercase. 
+
+However, we can use `$0` to escape, since $0 is a reference of the shell. See the test on the local machine.
+
+![alt text](images/image-82.png)
+
+We successfully break out the file. And we find that we are `bandit33` instead of `bandit32`
+
+![alt text](images/image-83.png)
+
+Read the file in `/home/bandit33`, we know this is (temporarily) the last level. 
+
+![alt text](images/image-79.png)
