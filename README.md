@@ -1,6 +1,6 @@
 # Overthewire_Bandit
 
-Welcome to the GitHub walkthrough for the Bandit Wargame! This repository is designed to guide you through the levels of Bandit. 
+This repository is designed to guide you through the levels of Bandit. 
 Bandit is structured as a series of progressively challenging levels, starting from Level 0 and culminating in Level 34. 
 Each level presents unique tasks that will help you build essential skills in navigating the Linux command line, 
 working with files, and understanding basic security concepts. By successfully completing each level, you'll unlock the next, 
